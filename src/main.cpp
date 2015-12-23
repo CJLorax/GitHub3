@@ -10,6 +10,7 @@ int main(int argc, const char * argv[]) {
     
     cout << "This is Windows" << endl;
     cout << "Would this show in windows" << endl;
+    cout << "Update from Linux" << endl;
     
 #endif
     
@@ -19,16 +20,19 @@ int main(int argc, const char * argv[]) {
     cout << "Does this add more???" << endl;
     cout << "AND Does this add more???" << endl;
 	cout << "Aadd from windows???" << endl;
+	cout << "Update from Linux" << endl;
     
     
 #endif
     
-#if defined (_linux__)
+#if defined (__linux__)
     
     cout << "This is Linux" << endl;
-    
+    cout << "Update ins Linux" << endl;
 #endif
     
+
+
     //test link
     cin.get();
     return 1;
