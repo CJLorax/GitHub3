@@ -16,6 +16,12 @@ int main() {
 
 #endif
 
+#if defined (_linux__) 
+
+	cout << "This is Linux" << endl;
+
+#endif
+
 	//test link
 	cin.get();
 	return 1;
