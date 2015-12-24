@@ -1,26 +1,44 @@
 #include <stdio.h>
 
+#if defined (_WIN32) ||  (_WIN64)
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#endif
+
+
+#if defined (__linux__)
+#include <unistd.h>
+#include <limits.h>
+#define GetCurrentDir getcwd
+#endif
+
 #include <iostream>
 
 using namespace std;
+
 
 int main(int argc, const char * argv[]) {
     
 #if defined (_WIN32) ||  (_WIN64)
     
-    cout << "This is Windows" << endl;
-    cout << "Would this show in windows" << endl;
-    cout << "Update from Linux" << endl;
+
+	char cCurrentPath[FILENAME_MAX];
+
+	if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
+	{
+		return errno;
+	}
+
+	cCurrentPath[sizeof(cCurrentPath) - 1] = '/0'; /* not really required */
+
+	printf("The current working directory is %s", cCurrentPath);
     
 #endif
     
 #if defined (__APPLE__)
     
     cout << "This is Apple" << endl;
-    cout << "Does this add more???" << endl;
-    cout << "AND Does this add more???" << endl;
-	cout << "Aadd from windows???" << endl;
-	cout << "Update from Linux" << endl;
+
     
     
 #endif
@@ -28,7 +46,11 @@ int main(int argc, const char * argv[]) {
 #if defined (__linux__)
     
     cout << "This is Linux" << endl;
-    cout << "Update ins Linux" << endl;
+
+	char result[PATH_MAX];
+	ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
+	GetCurrentDir =  std::string(result, (count > 0) ? count : 0);
+
 #endif
     
 
