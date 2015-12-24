@@ -2,21 +2,16 @@
 #include <string>
 #include <iostream>
 
-
 #if defined (_WIN32) ||  (_WIN64)
 #include <direct.h>
 #define getcwd _getcwd
 #endif
 
-
 #if defined (__linux__)
 #include <unistd.h>
 #endif
 
-
-
 using namespace std;
-
 
 
 int main(int argc, const char * argv[]) {
@@ -26,7 +21,7 @@ int main(int argc, const char * argv[]) {
 	
 	string s_cwd(getcwd(NULL, 0));
 
-	cout << s_cwd << endl;
+	//cout << s_cwd << endl;
 
 #endif
     
@@ -34,8 +29,6 @@ int main(int argc, const char * argv[]) {
     
     cout << "This is Apple" << endl;
 
-    
-    
 #endif
     
 #if defined (__linux__)
@@ -44,11 +37,11 @@ int main(int argc, const char * argv[]) {
 	
 	string s_cwd(getcwd(NULL, 0));
 
-	cout << s_cwd << endl;
+	//cout << s_cwd << endl;
 
 #endif
     
-
+	cout << s_cwd << endl;
 
     //test link
     cin.get();
