@@ -24,14 +24,11 @@ int main(int argc, const char * argv[]) {
 
 	char cCurrentPath[FILENAME_MAX];
 
-	if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
-	{
-		return errno;
-	}
-
 	cCurrentPath[sizeof(cCurrentPath) - 1] = '/0'; /* not really required */
 
-	printf("The current working directory is %s", cCurrentPath);
+	//printf("The current working directory is %s", cCurrentPath);
+
+	cout << "The current working directory is " + cCurrentPath << endl;
     
 #endif
     
@@ -48,8 +45,9 @@ int main(int argc, const char * argv[]) {
     cout << "This is Linux" << endl;
 
 	char result[PATH_MAX];
-	ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
-	GetCurrentDir =  std::string(result, (count > 0) ? count : 0);
+	string test = getcwd(result, PATH_MAX);
+
+	cout << "The current working directory is " + test << endl;
 
 #endif
     
