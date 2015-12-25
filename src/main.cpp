@@ -22,6 +22,8 @@ int main(int argc, const char * argv[]) {
 	
 	string s_cwd(getcwd(NULL, 0));
 
+	string s_cwd_images = s_cwd + "\\images\\";
+
 	cout << s_cwd << endl;
 
 #endif
@@ -38,7 +40,9 @@ int main(int argc, const char * argv[]) {
 	
 	string s_cwd(getcwd(NULL, 0));
 
-	//cout << s_cwd << endl;
+	string s_cwd_images = s_cwd + "/images/";
+
+	//cout << s_cwd_images << endl;
 
 #endif
     
@@ -47,7 +51,7 @@ int main(int argc, const char * argv[]) {
 	//shape.setFillColor(sf::Color::Green);
 
 	sf::Texture texture;
-	texture.loadFromFile(s_cwd + "\\images\\devilHead.png");
+	texture.loadFromFile(s_cwd_images + "devilHead.png");
 
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
