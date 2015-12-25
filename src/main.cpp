@@ -1,3 +1,4 @@
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <stdio.h>
 #include <string>
@@ -31,6 +32,11 @@ int main(int argc, const char * argv[]) {
 #if defined (__APPLE__)
     
     cout << "This is Apple" << endl;
+    
+    // Here is a small helper for you ! Have a look.
+    #include "ResourcePath.hpp"
+    
+    string s_cwd_images = resourcePath();
 
 #endif
     
@@ -47,8 +53,6 @@ int main(int argc, const char * argv[]) {
 #endif
     
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "SFML works!");
-	//sf::CircleShape shape(100.f);
-	//shape.setFillColor(sf::Color::Green);
 
 	sf::Texture texture;
 	texture.loadFromFile(s_cwd_images + "devilHead.png");
@@ -69,9 +73,9 @@ int main(int argc, const char * argv[]) {
 
 
 		window.clear();
-		//window.draw(shape);
 		window.draw(sprite);
 		window.display();
 	}
+    
     return 1;
 }
