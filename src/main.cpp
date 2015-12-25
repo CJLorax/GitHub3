@@ -1,5 +1,9 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -59,17 +63,43 @@ int main(int argc, const char * argv[]) {
 
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
+	
+	sf::Clock clock;
+	sf::Time time;
 
 	while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
+			
+			switch (event.type)
+			{
+				case sf::Event::EventType::Closed:
+					window.close();
+					break;
+
+			}
+	
 		}
 
+		time = clock.getElapsedTime();
 
+		if (sf::Joystick::isButtonPressed(0, 1))
+		{
+			// yes: shoot!
+			cout << "Firing my gun" << endl;
+		}
+
+		// what's the current position of the X and Y axes of joystick number 0?
+		float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+
+		
+		sprite.move(x * (0.1 * time.asMilliseconds()),
+			y * (0.1 * time.asMilliseconds()));
+
+		clock.restart().asMilliseconds();
 
 
 		window.clear();
