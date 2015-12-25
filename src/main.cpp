@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -21,7 +22,7 @@ int main(int argc, const char * argv[]) {
 	
 	string s_cwd(getcwd(NULL, 0));
 
-	//cout << s_cwd << endl;
+	cout << s_cwd << endl;
 
 #endif
     
@@ -41,9 +42,32 @@ int main(int argc, const char * argv[]) {
 
 #endif
     
-	cout << s_cwd << endl;
+	sf::RenderWindow window(sf::VideoMode(1024, 768), "SFML works!");
+	//sf::CircleShape shape(100.f);
+	//shape.setFillColor(sf::Color::Green);
 
-    //test link
-    cin.get();
+	sf::Texture texture;
+	texture.loadFromFile(s_cwd + "\\images\\devilHead.png");
+
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+
+
+
+		window.clear();
+		//window.draw(shape);
+		window.draw(sprite);
+		window.display();
+	}
     return 1;
 }
