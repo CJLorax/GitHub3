@@ -1,8 +1,6 @@
-#include <SFML/Audio.hpp>
+
 #include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
+
 
 #include <stdio.h>
 #include <string>
@@ -72,14 +70,16 @@ int main(int argc, const char * argv[]) {
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
+			if (event.type == sf::Event::Closed)
+			                window.close();
 			
-			switch (event.type)
-			{
-				case sf::Event::EventType::Closed:
-					window.close();
-					break;
+//			switch (event.type)
+//			{
+//				case sf::Event::EventType::Closed:
+//					window.close();
+//					break;
 
-			}
+//			}
 	
 		}
 
