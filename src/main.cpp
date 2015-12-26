@@ -64,6 +64,9 @@ int main(int argc, const char * argv[]) {
 	
 	sf::Clock clock;
 	sf::Time time;
+    
+    // Our speed in pixels per second
+    float speed = 5.0f;
 
 	while (window.isOpen())
 	{
@@ -83,7 +86,10 @@ int main(int argc, const char * argv[]) {
 	
 		}
 
-		time = clock.getElapsedTime();
+		//time = clock.getElapsedTime();
+        
+        // Get elapsed time
+        float delta = clock.restart().asSeconds();
 
 		if (sf::Joystick::isButtonPressed(0, 1))
 		{
@@ -96,10 +102,12 @@ int main(int argc, const char * argv[]) {
 		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 
 		
-		sprite.move(x * (0.1 * time.asMilliseconds()),
-			y * (0.1 * time.asMilliseconds()));
+		//sprite.move(x * (0.1 * time.asMilliseconds()),
+			//y * (0.1 * time.asMilliseconds()));
+        
+        sprite.move( (x * speed) * delta, (y * speed) * delta);
 
-		clock.restart().asMilliseconds();
+		//clock.restart().asSeconds();
 
 
 		window.clear();
