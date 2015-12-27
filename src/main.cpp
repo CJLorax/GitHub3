@@ -1,10 +1,12 @@
 
 #include <SFML/Graphics.hpp>
-
+#include "Bullet.h"
 
 #include <stdio.h>
 #include <string>
 #include <iostream>
+
+
 
 #if defined (_WIN32) ||  (_WIN64)
 #include <direct.h>
@@ -57,10 +59,10 @@ int main(int argc, const char * argv[]) {
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "SFML works!");
 
 	sf::Texture texture;
-	texture.loadFromFile(s_cwd_images + "devilHead.png");
+	texture.loadFromFile(s_cwd_images + "player.png");
 
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
+	sf::Sprite player;
+	player.setTexture(texture);
 	
 	sf::Clock clock;
 	sf::Time time;
@@ -75,20 +77,10 @@ int main(int argc, const char * argv[]) {
 		{
 			if (event.type == sf::Event::Closed)
 			                window.close();
-			
-//			switch (event.type)
-//			{
-//				case sf::Event::EventType::Closed:
-//					window.close();
-//					break;
-
-//			}
 	
 		}
 
-		//time = clock.getElapsedTime();
-        
-        // Get elapsed time
+		// Get elapsed time
         float delta = clock.restart().asSeconds();
 
 		if (sf::Joystick::isButtonPressed(0, 1))
@@ -101,17 +93,13 @@ int main(int argc, const char * argv[]) {
 		float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
 		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 
-		
-		//sprite.move(x * (0.1 * time.asMilliseconds()),
-			//y * (0.1 * time.asMilliseconds()));
         
-        sprite.move( (x * speed) * delta, (y * speed) * delta);
+        player.move( (x * speed) * delta, (y * speed) * delta);
 
-		//clock.restart().asSeconds();
 
 
 		window.clear();
-		window.draw(sprite);
+		window.draw(player);
 		window.display();
 	}
     
