@@ -1,11 +1,13 @@
 
 #include <SFML/Graphics.hpp>
-#include "Bullet.h"
+
 
 #include <stdio.h>
 #include <string>
 #include <iostream>
+#include <vector>
 
+#include "Player.h""
 
 
 #if defined (_WIN32) ||  (_WIN64)
@@ -58,17 +60,18 @@ int main(int argc, const char * argv[]) {
     
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "SFML works!");
 
+	//load texture for player
 	sf::Texture texture;
 	texture.loadFromFile(s_cwd_images + "player.png");
 
-	sf::Sprite player;
-	player.setTexture(texture);
+	//create Player
+	Player player = Player(texture);
+
 	
 	sf::Clock clock;
 	sf::Time time;
     
-    // Our speed in pixels per second
-    float speed = 5.0f;
+	
 
 	while (window.isOpen())
 	{
@@ -80,26 +83,17 @@ int main(int argc, const char * argv[]) {
 	
 		}
 
-		// Get elapsed time
+		// Get elapsed time for frame rate independence
         float delta = clock.restart().asSeconds();
 
-		if (sf::Joystick::isButtonPressed(0, 1))
-		{
-			// yes: shoot!
-			cout << "Firing my gun" << endl;
-		}
 
-		// what's the current position of the X and Y axes of joystick number 0?
-		float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-
-        
-        player.move( (x * speed) * delta, (y * speed) * delta);
+		//Update player
+		player.Update(delta);
 
 
-
+		//Draw Calls
 		window.clear();
-		window.draw(player);
+		player.Draw(window);
 		window.display();
 	}
     
