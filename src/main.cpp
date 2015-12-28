@@ -64,8 +64,10 @@ int main(int argc, const char * argv[]) {
 	sf::Texture texture;
 	texture.loadFromFile(s_cwd_images + "player.png");
 
+	string bulletDir = s_cwd_images;
+
 	//create Player
-	Player player = Player(texture);
+	Player player = Player(bulletDir, texture);
 
 	
 	sf::Clock clock;
